@@ -1,3 +1,15 @@
+# Curtis's two hour gilded rose refactor.
+
+Current spec and rubocop status:
+
+<img width="783" height="926" alt="image" src="https://github.com/user-attachments/assets/73557c3e-8f65-44eb-9c44-af3753b61016" />
+
+My refactor was in ruby, focussing on getting specs to match the requirements. I scaffolded up some basic specs, and did an initial readability refactor. My next step would have been to add support for "conjured" items.
+
+Enjoy!
+
+(Original readme follows)
+
 _Support this and all my katas via [Patreon](https://www.patreon.com/EmilyBache)_
 
 # Gilded Rose Refactoring Kata
