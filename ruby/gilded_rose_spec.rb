@@ -102,4 +102,13 @@ describe GildedRose do
       expect { gr.update_quality }.not_to(change { item.quality })
     end
   end
+
+  context 'with a backstage after concert' do
+    let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', -1, 25) }
+
+    it 'quality drops to 0' do
+      gr.update_quality
+      expect(item.quality).to eq(0)
+    end
+  end
 end

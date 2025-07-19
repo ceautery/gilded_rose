@@ -43,18 +43,6 @@ class Item
     @quality = quality
   end
 
-  def legendary?
-    name == 'Sulfuras, Hand of Ragnaros'
-  end
-
-  def update_sell_in
-    @sell_in -= 1 unless legendary?
-  end
-
-  def update_quality
-    @quality -= 1 if !legendary? && quality.positive?
-  end
-
   def to_s
     "#{@name}, #{@sell_in}, #{@quality}"
   end
