@@ -35,6 +35,14 @@ describe GildedRose do
     end
   end
 
+  context 'with an item past sell date' do
+    let(:item) { Item.new('foo', -1, 10) }
+
+    it 'quality decrements by 2' do
+      expect { gr.update_quality }.to change { item.quality }.by(-2)
+    end
+  end
+
   context 'with a legendary item' do
     let(:item) { Item.new('Sulfuras, Hand of Ragnaros', 1, 1) }
 
@@ -59,6 +67,38 @@ describe GildedRose do
     let(:item) { Item.new('Aged Brie', 1, 50) }
 
     it 'quality stops at 50' do
+      expect { gr.update_quality }.not_to(change { item.quality })
+    end
+  end
+
+  context 'with a backstage pass' do
+    let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 20, 10) }
+
+    it 'increments quality' do
+      expect { gr.update_quality }.to change { item.quality }.by(1)
+    end
+  end
+
+  context 'with a backstage pass ten days before concert' do
+    let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 10, 10) }
+
+    it 'increments quality by 2' do
+      expect { gr.update_quality }.to change { item.quality }.by(2)
+    end
+  end
+
+  context 'with a backstage pass five days before concert' do
+    let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 5, 10) }
+
+    it 'increments quality by 3' do
+      expect { gr.update_quality }.to change { item.quality }.by(3)
+    end
+  end
+
+  context 'with a backstage pass at 50 quality' do
+    let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 5, 50) }
+
+    it 'increments quality by 3' do
       expect { gr.update_quality }.not_to(change { item.quality })
     end
   end
